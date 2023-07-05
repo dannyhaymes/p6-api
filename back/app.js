@@ -5,7 +5,6 @@ app.use(express.json());
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 const Sauce = require('./models/sauce');
-const auth = require('./middleware/auth');
 const path = require('path');
 const sauce = require('./models/sauce');
 
