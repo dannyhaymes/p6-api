@@ -37,66 +37,8 @@ app.use((req, res, next) => {
       });
 });
 
-app.get('/api/sauces', auth, (req, res, next) => {
-    Sauce.find().then(
-        (sauces) => {
-            res.status(200).json(sauces);
-        }
-    ).catch(
-        (error) => {
-            res.status(400).json({
-                error: error
-            });
-        }
-    );
-});
 
 
-
-app.put('/api/sauces/:id', (req, res, next) => {
-    const sauce = new Sauce({
-        _id: req.params.id,
-        name: req.body.title,
-        description: req.body.description,
-        imageUrl: req.body.imageUrl,
-        // likes:, 
-        // dislikes:,
-        // usersLiked:,
-        // usersDisliked:,
-        // mainPepper: req.body.mainPepper,
-        // heat:,
-        // manufacturer: req.body.manufacturer,
-    });
-    Sauce.modifySauce({ _id: req.params.id }, sauce).then(
-        () => {
-            res.status(201).json({
-                message: 'Sauce updated successfully!'
-            });
-        }
-    ).catch(
-        (error) => {
-            res.status(400).json({
-                error: error
-            });
-        }
-    );
-});
-
-app.delete('/api/sauces/:id', (req, res, next) => {
-    Sauce.deleteOne({ _id: req.params.id }).then(
-        () => {
-            res.status(200).json({
-                message: 'Deleted!'
-            });
-        }
-    ).catch(
-        (error) => {
-            res.status(400).json({
-                error: error
-            });
-        }
-    );
-});
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', userRoutes);
 app.use('/api/sauces', sauceRoutes);
